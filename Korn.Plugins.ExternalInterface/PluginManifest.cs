@@ -6,8 +6,7 @@ public record PluginManifest(
     string DisplayName,
     string Version,
     PluginAuthor[] Authors,
-    PluginTarget[] Targets
-)
+    PluginTarget[] Targets)
 {
     public static PluginManifest? Deserialize(string path) => JsonConvert.DeserializeObject<PluginManifest>(path);
 }
