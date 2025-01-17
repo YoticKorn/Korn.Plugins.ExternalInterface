@@ -1,30 +1,35 @@
 ﻿using Newtonsoft.Json;
 
-namespace Korn.Plugins.ExternalInterface;
-public record PluginManifest(
-    string Name,
-    string DisplayName,
-    string Version,
-    PluginAuthor[] Authors,
-    PluginTarget[] Targets)
+namespace Korn.Plugins.ExternalInterface
 {
-    public static PluginManifest? Deserialize(string path) => JsonConvert.DeserializeObject<PluginManifest>(path);
-}
+    public class PluginManifest
+    {
+        public string Name;
+        public string DisplayName;
+        public string Version;
+        public PluginAuthor[] Authors;
+        public PluginTarget[] Targets;
 
-public record PluginAuthor(
-    string Name,
-    string? Github
-);
+        public static PluginManifest Deserialize(string path) => JsonConvert.DeserializeObject<PluginManifest>(path);
+    }
 
-public record PluginTarget(
-    PluginFrameworkTarget TargetFramework,
-    string[]? TargetProcesses,
-    string ExecutableFilePath,
-    string PluginClass
-);
+    public class PluginAuthor
+    {
+        public string Name;
+        public string Github;
+    }
 
-public enum PluginFrameworkTarget
-{
-    NetFramework472,
-    Net8
+    public class PluginTarget
+    {
+        public PluginFrameworkTarget TargetFramework;
+        public string[] TargetProcesses;
+        public string ExecutableFilePath;
+        public string PluginClass;
+    }
+
+    public enum PluginFrameworkTarget
+    {
+        NetFramework472,
+        Net8
+    }
 }
